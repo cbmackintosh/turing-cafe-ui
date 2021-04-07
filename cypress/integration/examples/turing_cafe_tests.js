@@ -13,7 +13,10 @@ describe('Turing Cafe', () => {
     .get('input[id="number-input"]').should('exist')
     .get('button[id="make-reservation"]').should('exist')
     .get('div[class="reservation-container"]').children('div[class="reservation-card"]')
-
+    .get('div[class="reservation-card"]').children('h2[class="reservation-name"]')
+    .get('div[class="reservation-card"]').children('h3[class="reservation-date"]')
+    .get('div[class="reservation-card"]').children('p[class="reservation-time"]')
+    .get('div[class="reservation-card"]').children('p[class="reservation-number"]')
   })
 
   it('Write a test that checks that when data is put into the form, the value is reflected in that form input.', () => {
