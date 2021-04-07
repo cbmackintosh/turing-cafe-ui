@@ -5,10 +5,10 @@ class Form extends Component {
   constructor() {
     super()
     this.state = {
-      guestName: '',
+      name: '',
       date: '',
       time: '',
-      numberOfGuests: ''
+      number: ''
     }
   }
 
@@ -20,17 +20,16 @@ class Form extends Component {
           placeholder="Name"
           name='guestName'
           value={this.state.guestName}
-          onChange={event => this.handleChange(event)}
+          onChange={event => this.handleNameChange(event)}
         />
 
         <input 
           type="date"
           name='date'
-          value={this.state.date}
           onChange={event => this.handleDateChange(event)}
         />
 
-        <select value={this.state.date} onChange={event => this.handleTimeChange(event)}>
+        <select onChange={event => this.handleTimeChange(event)}>
           <option>12:00 pm</option>
           <option>12:30 pm</option>
           <option>1:00 pm</option>
@@ -56,16 +55,20 @@ class Form extends Component {
           max="12"
           name="numberOfGuests"
           value={this.state.numberOfGuests}
-          onChange={event => this.handleChange(event)}
+          onChange={event => this.handleNumberChange(event)}
         />
 
-        <button>Make Reservation</button>
+        <button onClick={event => this.submitReservation(event)}>Make Reservation</button>
       </form>
     )
   }
 
-  handleChange = (event) => {
-    this.setState({[event.target.name]: event.target.value})
+  handleNameChange = (event) => {
+    this.setState({name: event.target.value})
+  }
+
+  handleNumberChange = (event) => {
+    this.setState({number: parseInt(event.target.value)})
   }
 
   handleDateChange = (event) => {
@@ -76,10 +79,19 @@ class Form extends Component {
     this.setState({time: event.target.value.substring(0, 4)})
   }
 
-  formatDate(date) {
+  formatDate = (date) => {
     let month = parseInt(date.split('-')[1])
     let day = parseInt(date.split('-')[2])
     return `${month}/${day}`
+  }
+
+  submitReservation = (event) => {
+    event.preventDefault()
+    const newReservation = {
+      id: Date.now(),
+      ...this.state
+    }
+    this.props.makeReservation(newReservation)
   }
 
 }
