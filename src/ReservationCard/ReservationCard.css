@@ -1,0 +1,8 @@
+
+.reservation-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 3px solid #008080;
+  border-radius: 5px
+}

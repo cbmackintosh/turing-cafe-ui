@@ -1,11 +1,13 @@
 import React from 'react'
 import ReservationCard from '../ReservationCard/ReservationCard'
+import './ReservationContainer.css'
 
 const ReservationContainer = ({ reservations }) => {
 
   const reservationCards = reservations.map(reservation => {
     return (
       <ReservationCard 
+        key={reservation.id}  
         name={reservation.name}
         date={reservation.date}
         time={reservation.time}
@@ -15,7 +17,7 @@ const ReservationContainer = ({ reservations }) => {
   })
 
   return (
-    <div className='resy-container'>
+    <div className='reservation-container'>
       {reservationCards}
     </div>
   )
